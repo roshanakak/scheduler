@@ -1,4 +1,4 @@
-// Returns the Appointments for a given day (ex: Monday)
+// Appointments for a given day
 export const getAppointmentsForDay = (state, day) => {
   const appointmentsId = state.days
     .filter(e => e.name === day)
@@ -13,7 +13,7 @@ export const getAppointmentsForDay = (state, day) => {
   return appointment;
 };
 
-// Returns the interviewrs for a given day (ex: Monday)
+// Interviewers for a given day
 export const getInterviewersForDay = (state, day) => {
   const interviewersId = state.days
     .filter(e => e.name === day)
@@ -29,7 +29,7 @@ export const getInterviewersForDay = (state, day) => {
   return interviewers;
 };
 
-// Returns an object like: {student, interviewer}
+// Returns an object: {student, interviewer}
 export const getInterview = (state, interview) => {
   if (!interview) {
     return null;
