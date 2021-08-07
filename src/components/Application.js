@@ -1,109 +1,73 @@
-import React, { useState } from "react";
+import React from 'react';
 
-import "components/Application.scss";
-import DayList from "components/DayList.js";
-import Appointment from "components/Appointment";
+import 'components/Application.scss';
 
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
+import Appointment from 'components/Appointment/index';
+import DayList from 'components/DayList';
 
-const appointments = [
-  {
-    id: 1,
-    time: "12pm",
-  },
-  {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
+import useApplicationData from 'hooks/useApplicationData';
+
+import {
+  getAppointmentsForDay,
+  getInterviewersForDay,
+  getInterview,
+  getSpotsForDay
+} from './helpers/selectors';
+
+export default function Application() {
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview
+  } = useApplicationData();
+
+  const interviewers = getInterviewersForDay(state, state.day);
+
+  const appointments = getAppointmentsForDay(state, state.day).map(
+    appointment => {
+      return (
+        <Appointment
+          key={appointment.id}
+          {...appointment}
+          interview={getInterview(state, appointment.interview)}
+          interviewers={interviewers}
+          bookInterview={bookInterview}
+          cancelInterview={cancelInterview}
+        />
+      );
     }
-  },
-  {
-    id: 3,
-    time: "3pm",
-    interview: {
-      student: "Roshanak",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  }
-];
-
-export default function Application(props) {
-  const [day, setDay] = useState("Monday");
-
+  );
   return (
     <main className="layout">
-      <section className="sidebar" >       
-
-          <img
+      <section className="sidebar">
+        <img
           className="sidebar--centered"
           src="images/logo.png"
           alt="Interview Scheduler"
-          />
-          <hr className="sidebar__separator sidebar--centered" />
-          <nav className="sidebar__menu">
-            <DayList
-            days={days}
-            day={day}
+        />
+        <hr className="sidebar__separator sidebar--centered" />
+        <nav className="sidebar__menu">
+          <DayList
+            days={state.days}
+            selectedDay={state.day}
             setDay={setDay}
-            />
-          </nav>
-
-          <img
+            appointments={state.appointments}
+            getSpotsForDay={getSpotsForDay}
+          />
+        </nav>
+        <img
           className="sidebar__lhl sidebar--centered"
           src="images/lhl.png"
           alt="Lighthouse Labs"
-          />
-      
+        />
       </section>
       <section className="schedule">
-
-        {/* {appointments} */}
-        {appointments.map}
-
-        {
-        appointments.map(appointment => (
-          <appointment 
-          id={appointment.id}
-          time={appointment.name} 
-          interview={appointment.interview}  
-          />
-          ))
-        }
-
-        <Appointment key="last" time="5pm" />
-
+        <section className="schedule">
+          {appointments}
+          <Appointment key="last" time="5pm" />
+        </section>
       </section>
-      
     </main>
-
-
-
-
   );
 }
