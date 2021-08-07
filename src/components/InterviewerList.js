@@ -6,33 +6,22 @@ import InterviewerListItem from "components/InterviewerListItem";
 
 export default function DayList(props) {
 
-  
-
-  // return (
-  //   <section className="interviewers">
-  //     <h4 className="interviewers__header text--light">Interviewer</h4>
-  //     <ul className="interviewers__list"></ul>
-  //   </section>
-  // );
-
-
-
   return (
     <section className="interviewers">
     <h4 className="interviewers__header text--light">Interviewer</h4>
-    <ul className="interviewers__list"></ul>
+    <ul className="interviewers__list">
       {
         props.interviewers.map(interviewer => (
           <InterviewerListItem 
-            id={interviewer.id}
+            key={interviewer.id}
             name={interviewer.name} 
             avatar={interviewer.avatar} 
-            selected={interviewer.selected}
-            setInterviewer={props.setInterviewer}  
+            selected={interviewer.id === props.value}
+            setInterviewer={() => props.onChange(interviewer.id)}  
           />
           ))
       }
-    <ul className="interviewers__list"></ul>
+    </ul>
     </section>
   )
 
