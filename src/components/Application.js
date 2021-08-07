@@ -1,10 +1,8 @@
 import React from 'react';
 
 import 'components/Application.scss';
-
-import Appointment from 'components/Appointment/index';
 import DayList from 'components/DayList';
-
+import Appointment from 'components/Appointment/index';
 import useApplicationData from 'hooks/useApplicationData';
 
 import {
