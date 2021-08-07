@@ -11,8 +11,7 @@ import axios from "axios";
 
 export default function useApplicationData() {
 
-  // Manages the state
-  // Interacts with the reducer
+  // Manages the state, Interacts with the reducer
   const [state, dispatch] = useReducer(reducer, {
     day: 'Monday',
     days: [],
@@ -22,21 +21,16 @@ export default function useApplicationData() {
 
   const setDay = day => dispatch({ type: SET_DAY, day });
 
-  // Retrieves days, appointments and interviewers from API
-  // sends the info to dispatch to update the state
+  // Retrieves days, appointments and interviewers from API, sends the info to dispatch to update the state
   useEffect(() => {
-    // const source = axios.CancelToken.source();
     const days = axios.get(`/api/days`, {
-      proxy: { host: 'localhost', port: 3001 },
-      // cancelToken: source.token,
+      proxy: { host: 'localhost', port: 8001 },
     });
     const appointments = axios.get(`/api/appointments`, {
-      proxy: { host: 'localhost', port: 3001 },
-      // cancelToken: source.token,
+      proxy: { host: 'localhost', port: 8001 },
     });
     const interviewers = axios.get(`/api/interviewers`, {
-      proxy: { host: 'localhost', port: 3001 },
-      // cancelToken: source.token,
+      proxy: { host: 'localhost', port: 8001 },
     });
     Promise.all([days, appointments, interviewers]).then(
       ([days, appointments, interviewers]) =>
