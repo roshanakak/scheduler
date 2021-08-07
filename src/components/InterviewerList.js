@@ -4,7 +4,7 @@ import "components/InterviewerList.scss";
 import InterviewerListItem from "components/InterviewerListItem";
 
 
-export default function DayList(props) {
+export default function InterviewerList(props) {
 
   return (
     <section className="interviewers">
