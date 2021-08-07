@@ -4,6 +4,7 @@
 .interviewers {
   &__item {
     @include button-inactive--opacity;
+    color: $dark-background;
 
     margin-right: 0.5rem;
 
@@ -20,7 +21,7 @@
       align-items: center;
       padding-left: 2px;
       padding-right: 1rem;
-      user-select: none;
+      user-select: none; 
     }
 
     &--selected &-image {
