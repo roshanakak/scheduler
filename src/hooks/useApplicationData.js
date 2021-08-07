@@ -41,14 +41,9 @@ export default function useApplicationData() {
           interviewers: interviewers.data
         })
     )
-    // .cath((e) => console.log("HEY ERRROR!!!!"));
-    // return () => {
-      // source.cancel('Request canceled');
-    // };
   }, []);
 
-  // Sends new appointment request to API
-  // sends the info to dispatch to update the state
+  // Sends new appointment request to API, update the state
   const bookInterview = function(id, interview) {
     return axios
       .put(`/api/appointments/${id}`, { interview })
@@ -57,8 +52,7 @@ export default function useApplicationData() {
       });
   };
 
-  // Sends cancellation request to API
-  // sends the info to dispatch to update the state
+  // Sends cancellation request to API, update the state
   const cancelInterview = function(id) {
     return axios
       .delete(`/api/appointments/${id}`)
@@ -67,7 +61,7 @@ export default function useApplicationData() {
       });
   };
 
-  // Responsible for the Web Socket connection
+  // Web Socket connection
   useEffect(() => {
     const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
 
