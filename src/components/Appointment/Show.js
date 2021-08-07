@@ -2,7 +2,7 @@ import React from "react";
 
 import "./styles.scss";
 
-export default function Empty(props) {
+export default function Show(props) {
 
   return (
     <main className="appointment__card appointment__card--show">
