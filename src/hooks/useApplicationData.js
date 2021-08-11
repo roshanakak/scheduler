@@ -63,7 +63,7 @@ export default function useApplicationData() {
 
   // Web Socket connection
   useEffect(() => {
-    const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+    const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL); 
 
     socket.onmessage = function(event) {
       const data = JSON.parse(event.data);
