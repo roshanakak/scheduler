@@ -1,127 +1,29 @@
 # Interview Scheduler API
 
-## Setup
+## Overview
+An application to be used for booking appointments with interviewers, by students in a course.
 
-Install dependencies with `npm install`.
+## Screenshots
+### The main view of the application:
 
-## Creating The DB
+!["Main page"](https://github.com/roshanakak/scheduler/blob/master/docs/main-view.png?raw=true)
 
-Use the `psql -U development` command to login to the PostgreSQL server with the username `development` and the password `development`. This command **MUST** be run in a vagrant terminal, we are using the PostgreSQL installation provided in the vagrant environment.
+### It is an adaptive applicatio and handles various types and sizes of screens:
 
-Create a database with the command `CREATE DATABASE scheduler_development;`.
+!["Adaptive Design"](https://github.com/roshanakak/scheduler/blob/master/docs/adaptive-design.png?raw=true)
 
-Copy the `.env.example` file to `.env.development` and fill in the necessary PostgreSQL configuration. The `node-postgres` library uses these environment variables by default.
+### Adding an appointment:
 
-```
-PGHOST=localhost
-PGUSER=development
-PGDATABASE=scheduler_development
-PGPASSWORD=development
-PGPORT=5432
-```
+!["Adding an appointment"](https://github.com/roshanakak/scheduler/blob/master/docs/add-appointment.png?raw=true)
 
-## Seeding
+### If student name has not been inserted:
 
-Run a the development server with `npm start` in the Host environment. We are only using vagrant for `psql` this week.
+!["If student name has not been inserted"](https://github.com/roshanakak/scheduler/blob/master/docs/contextual-errors.png?raw=true)
 
-Both of these achieve the same result.
+### Confirmation before before deleting an appointment:
 
-- Make a `GET` request to `/api/debug/reset` with `curl http://localhost:8001/api/debug/reset`.
-- Use the browser to navigate to `http://localhost:8001/api/debug/reset`.
+!["Confirm before deletion"](https://github.com/roshanakak/scheduler/blob/master/docs/deletion-confirmation.png?raw=true)
 
-The `development` data is random. Each time we seed we expect to see different appointments.
 
-## Run The Server
 
-Running the server normally
-```sh
-npm start
-```
 
-Running the server so it returns an error when saving/deleting for testing the client's error handling capabilities
-```sh
-npm run error
-```
-
-## Api
-
-### Days
-
-`GET /api/days`
-
-Response
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Monday",
-    "appointments": [1, 2],
-    "interviewers": [1, 2],
-    "spots": 0
-  }
-]
-```
-
-### Appointments
-
-`GET /api/appointments`
-
-Response:
-
-```json
-{
-  "1": {
-    "id": 1,
-    "time": "12pm",
-    "interview": {
-      "student": "Lydia Miller-Jones",
-      "interviewer": 1
-    }
-  },
-  "2": {
-    "id": 2,
-    "time": "1pm",
-    "interview": {
-      "student": "Archie Cohen",
-      "interviewer": 2
-    }
-  }
-}
-```
-
-`PUT /api/appointments/:id`
-
-Body:
-
-```json
-{
-  "interview": {
-    "student": String,
-    "interviewer": Number
-  }
-}
-```
-
-`DELETE /api/appointments/:id`
-
-### Interviewers
-
-`GET /api/interviewers`
-
-Response:
-
-```json
-{
-  "1": {
-    "id": 1,
-    "name": "Sylvia Palmer",
-    "avatar": "https://i.imgur.com/LpaY82x.png"
-  },
-  "2": {
-    "id": 2,
-    "name": "Tori Malcolm",
-    "avatar": "https://i.imgur.com/Nmx0Qxo.png"
-  }
-}
-```
